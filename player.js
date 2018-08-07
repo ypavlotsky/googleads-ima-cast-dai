@@ -13,7 +13,7 @@ const Player = function(mediaElement) {
   this.castPlayer_ = null;
   this.seekToTimeAfterAdBreak_ = 0;
   this.startTime_ = 0;
-  this.needsCredentials_ = false;
+  this.needsCredentials_ = true;
   this.adIsPlaying_ = false;
   this.mediaElement_ = mediaElement;
   this.receiverManager_ = cast.receiver.CastReceiverManager.getInstance();
@@ -68,7 +68,7 @@ Player.prototype.initStreamManager_ = function() {
   this.streamManager_.addEventListener(
       google.ima.dai.api.StreamEvent.Type.LOADED,
       function(event) {
-        const streamUrl = event.getStreamData().url + '?hdnea=st=1533651422~exp=1533655022~acl=/*~hmac=379f3c83f84d6028b8edd7c1929c76a2048c217245a5ad72b03fc9530b3f502f';
+        const streamUrl = event.getStreamData().url;
         // Each element in subtitles array is an object with url and language
         // properties. Example of a subtitles array with 2 elements:
         // {
