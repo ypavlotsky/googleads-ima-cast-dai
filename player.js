@@ -242,6 +242,9 @@ Player.prototype.onLoad = function(event) {
     this.streamRequest =
       new google.ima.dai.api.VODStreamRequest(imaRequestData);
   }
+  this.streamRequest.adTagParameters = {
+    "iu": "/124319096/external/ad_rule_samples",
+  }
   this.streamManager_.requestStream(this.streamRequest);
   document.getElementById('splash').style.display = 'none';
 };
