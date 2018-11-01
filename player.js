@@ -13,7 +13,7 @@ const Player = function(mediaElement) {
   this.castPlayer_ = null;
   this.seekToTimeAfterAdBreak_ = 0;
   this.startTime_ = 0;
-  this.needsCredentials_ = true;
+  this.needsCredentials_ = false;
   this.adIsPlaying_ = false;
   this.mediaElement_ = mediaElement;
   this.receiverManager_ = cast.receiver.CastReceiverManager.getInstance();
@@ -234,7 +234,7 @@ Player.prototype.onLoad = function(event) {
    */
   const imaRequestData = event.data.media.customData;
   this.startTime_ = imaRequestData.startTime;
-  //this.needsCredentials_ = imaRequestData.needsCredentials;
+  this.needsCredentials_ = imaRequestData.needsCredentials;
   if (imaRequestData.assetKey) {
     this.streamRequest =
       new google.ima.dai.api.LiveStreamRequest(imaRequestData);
@@ -242,7 +242,7 @@ Player.prototype.onLoad = function(event) {
     this.streamRequest =
       new google.ima.dai.api.VODStreamRequest(imaRequestData);
   }
-  this.streamRequest.adTagParameters = {
+   this.streamRequest.adTagParameters = {
     "iu": "/124319096/external/ad_rule_samples",
   }
   this.streamManager_.requestStream(this.streamRequest);
